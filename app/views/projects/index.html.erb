@@ -1,0 +1,39 @@
+<%= render 'navbar' %>
+<section class="section">
+  <div class="container">
+    <div class="columns">
+
+      <% @projects.each do |project| %>
+        <div class="column is-one-third">
+          <div class="card">
+
+            <header class="card-header">
+              <p class="card-header-title">
+                <%= project.title %>
+              </p>
+            </header>
+
+            <div class="card-content">
+              <div class="content">
+                <dl>
+
+                  <% project.todos.each do |todo| %>
+                    <dt>
+                      <label class="checkbox">
+                        <input type="checkbox" <% if todo.isCompleted %> checked <% end %>/>
+                        <%= todo.text %>
+                      </label>
+                    </dt>
+                  <% end %>
+
+                </dl>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</section>
