@@ -6,7 +6,8 @@ class TodosController < ApplicationController
     raise ActiveRecord::RecordNotFound if @todo.nil?
 
     if @todo.update(isCompleted: !@todo.isCompleted)
-      render json: @todo
+      render json: { todo: @todo, status: 'OK' }, status: 200
+      # redirect_to '/projects', flash: { alert: 'Item is added!' }
     else
       render json: @todo.errors, status: :unprocessable_entity
     end
@@ -22,6 +23,7 @@ class TodosController < ApplicationController
     else
       Todo.create(params[:todo])
     end
+    redirect_to '/projects', flash: { alert: 'Item is added!' }
   end
 
   private

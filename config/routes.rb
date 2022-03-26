@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get '/projects', to: 'projects#index'
 
   resources :projects do
-    resources :todos, only: %i[update show], to: 'todos#update_todo'
+    resources :todos, only: [:update], to: 'todos#update_todo'
   end
   # get '/projects/:id/todos/:id', to: 'todos#check_todo'
   post '/todos', to: 'todos#create'

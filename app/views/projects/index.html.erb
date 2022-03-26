@@ -1,4 +1,5 @@
 <%= render 'navbar' %>
+
 <section class="section">
   <div class="container">
     <div class="columns">
@@ -19,10 +20,19 @@
 
                   <% project.todos.each do |todo| %>
                     <dt>
-                      <label class="checkbox">
-                        <input type="checkbox" <% if todo.isCompleted %> checked <% end %>/>
-                        <%= todo.text %>
-                      </label>
+                      <label>
+                      <%= check_box_tag todo.id, todo.isCompleted, todo.isCompleted %>
+
+                      <%= link_to "#{todo.text}", "/projects/#{project.id}/todos/#{todo.id}",
+                              id: "todo-#{todo.id}",
+                              class: 'is-strikethrough',
+                              remote: true,
+                              method: :patch
+                      %>
+                    </label>
+
+
+
                     </dt>
                   <% end %>
 
@@ -37,3 +47,7 @@
     </div>
   </div>
 </section>
+
+<%= render 'modal_window' %>
+
+<%= javascript_pack_tag 'todo' %>
