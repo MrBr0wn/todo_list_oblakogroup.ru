@@ -1,12 +1,24 @@
 $(document).ready(function() {
 
-  $('form').click(function () {
-      $(this).submit();
-  });
-
-  $("form").submit(function (event) {
-    console.log(event.currentTarget);
+  $('a').click(function () {
     event.preventDefault();
+    $('a').on('ajax:success', function (event) {
+        let detail = event.detail;
+        // console.log(detail);
+        if (detail[1] == "OK") {
+          if (detail[0].todo.isCompleted) {
+            $(this).addClass('is-strikethrough');
+            $(this).prev().prop('checked', 'checked');
+          } else {
+            $(this).removeClass('is-strikethrough');
+            $(this).prev().prop('checked', '');
+          }
+        } else {
+
+            console.log("Bad");
+        }
+    });
+
   });
 
 

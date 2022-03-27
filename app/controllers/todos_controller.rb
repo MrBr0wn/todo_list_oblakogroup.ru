@@ -7,21 +7,18 @@ class TodosController < ApplicationController
 
     if @todo.update(isCompleted: !@todo.isCompleted)
       render json: { todo: @todo, status: 'OK' }, status: 200
-      # redirect_to '/projects', flash: { alert: 'Item is added!' }
     else
       render json: @todo.errors, status: :unprocessable_entity
     end
   end
 
   def create
-    if params[:project].present?
-      before_action do
-        @project = Project.create(params[:project])
-      end
-
-      Todo.create(params[:todo], project_id: @project.id)
+    if false
+      @project = Project.new(todo_params[:project])
+      # Todo.create(params[:todo], project_id: @project.id)
     else
-      Todo.create(params[:todo])
+      todo = Todo.new(todo_params)
+      todo.save!
     end
     redirect_to '/projects', flash: { alert: 'Item is added!' }
   end
@@ -29,6 +26,6 @@ class TodosController < ApplicationController
   private
 
   def todo_params
-    params.permit(:id, :text, :project_id, :isCompleted)
+    params.require(:todo).permit(:text, :isCompleted, :project_id)
   end
 end

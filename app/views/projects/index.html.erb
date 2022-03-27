@@ -25,7 +25,7 @@
 
                       <%= link_to "#{todo.text}", "/projects/#{project.id}/todos/#{todo.id}",
                               id: "todo-#{todo.id}",
-                              class: 'is-strikethrough',
+                              class: ('is-strikethrough' if todo.isCompleted),
                               remote: true,
                               method: :patch
                       %>
