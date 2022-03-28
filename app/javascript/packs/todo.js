@@ -1,26 +1,40 @@
 $(document).ready(function() {
 
+  // Update todo item and switch checkbox
   $('a').click(function () {
     event.preventDefault();
     $('a').on('ajax:success', function (event) {
         let detail = event.detail;
-        // console.log(detail);
+        console.log();
         if (detail[1] == "OK") {
           if (detail[0].todo.isCompleted) {
             $(this).addClass('is-strikethrough');
-            $(this).prev().prop('checked', 'checked');
+            $(this).find("input").prop('checked', 'checked');
           } else {
             $(this).removeClass('is-strikethrough');
-            $(this).prev().prop('checked', '');
+            $(this).find("input").prop('checked', '');
           }
         } else {
 
-            console.log("Bad");
+            console.log("Todo respond error");
         }
     });
-
   });
 
+  // Insert category title field to the creating todo item form
+  $('#todo_project_id').on('change', function () {
+    if ($(this).val() == '') {
+      $('#todo_project').removeClass('is-hidden');
+    } else {
+
+      $('#todo_project').addClass('is-hidden');
+    }
+  });
+
+  $('#close-modal-btn').click(function (event) {
+    console.log('btn close')
+    event.preventDefault();
+  })
 
   // Functions to open and close a modal
   function openModal($el) {

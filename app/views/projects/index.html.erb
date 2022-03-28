@@ -2,47 +2,9 @@
 
 <section class="section">
   <div class="container">
-    <div class="columns">
+    <div class="columns is-multiline">
 
-      <% @projects.each do |project| %>
-        <div class="column is-one-third">
-          <div class="card">
-
-            <header class="card-header">
-              <p class="card-header-title">
-                <%= project.title %>
-              </p>
-            </header>
-
-            <div class="card-content">
-              <div class="content">
-                <dl>
-
-                  <% project.todos.each do |todo| %>
-                    <dt>
-                      <label>
-                      <%= check_box_tag todo.id, todo.isCompleted, todo.isCompleted %>
-
-                      <%= link_to "#{todo.text}", "/projects/#{project.id}/todos/#{todo.id}",
-                              id: "todo-#{todo.id}",
-                              class: ('is-strikethrough' if todo.isCompleted),
-                              remote: true,
-                              method: :patch
-                      %>
-                    </label>
-
-
-
-                    </dt>
-                  <% end %>
-
-                </dl>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      <% end %>
+      <%= render 'card' %>
 
     </div>
   </div>

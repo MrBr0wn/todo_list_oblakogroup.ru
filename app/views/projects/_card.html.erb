@@ -1,0 +1,40 @@
+<% @projects.each do |project| %>
+  <div class="column is-3">
+    <div class="card">
+
+      <header class="card-header">
+        <p class="card-header-title">
+          <%= project.title %>
+        </p>
+      </header>
+
+      <div class="card-content">
+        <div class="content">
+          <dl>
+
+            <% project.todos.each do |todo| %>
+              <dt>
+                <a href="<%= "/projects/#{project.id}/todos/#{todo.id}" %>"
+                  id="<%= "todo-#{todo.id}" %>"
+                  class="<%= 'is-strikethrough' if todo.isCompleted %>"
+                  data-remote="true"
+                  data-method="patch"
+                  rel="nofollow"
+                >
+                  <label>
+                    <%= check_box_tag todo.id, todo.isCompleted, todo.isCompleted %>
+                    <%= todo.text %>
+                  </label>
+                </a>
+
+
+              </dt>
+            <% end %>
+
+          </dl>
+        </div>
+      </div>
+
+    </div>
+  </div>
+<% end %>

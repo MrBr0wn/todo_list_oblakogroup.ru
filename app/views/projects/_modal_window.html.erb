@@ -9,15 +9,20 @@
 
       <%= form_for :todo, url: todos_path do |form| %>
         <%#= form.collection_select :project_select, Project.order(:title), :id, :title %>
-        <%= form.text_field  :text, placeholder: 'Название задачи...' %>
-        <%= select("todo", "project_id", @projects.collect {|p| [ p.title, p.id ] }, { include_blank: 'Категория' }) %>
+        <div class="block">
+          <%= form.text_field  :text, placeholder: 'Название задачи...', class: 'input is-focused' %>
+        </div>
+        <div class="block">
+          <%= form.text_field :project, placeholder: 'Название новой категории...', class: 'input is-hidden' %>
+        </div>
+        <div class="select is-fullwidth">
+          <%= select(:todo, "project_id", @projects.collect {|p| [ p.title, p.id ] }, { include_blank: 'Новая категория', selected: @projects.first.id }) %>
+        </div>
 
     </section>
     <footer class="modal-card-foot">
-      <div class="container is-centered">
-        <button class="button has-background-grey-light has-text-light">ОТМЕНА</button>
+        <button class="button has-background-grey-light has-text-light" id="close-modal-btn">ОТМЕНА</button>
         <%= form.submit 'OK', class: "button is-info" %>
-      </div>
     </footer>
     <% end %>
   </div>

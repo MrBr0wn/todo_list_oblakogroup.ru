@@ -13,12 +13,18 @@ class TodosController < ApplicationController
   end
 
   def create
-    if false
-      @project = Project.new(todo_params[:project])
-      # Todo.create(params[:todo], project_id: @project.id)
+    if !params[:todo][:project].empty?
+      @project = Project.new({ title: todo_params[:project] })
+
+      if @project.save!
+        @todo = Todo.new(todo_params.except(:project).merge!(project_id: @project.id))
+        @todo.save!
+      else
+        render json: @project.errors, status: :unprocessable_entity
+      end
     else
-      todo = Todo.new(todo_params)
-      todo.save!
+      @todo = Todo.new(todo_params.except(:project))
+      render json: @todo.errors, status: :unprocessable_entity unless @todo.save!
     end
     redirect_to '/projects', flash: { alert: 'Item is added!' }
   end
@@ -26,6 +32,6 @@ class TodosController < ApplicationController
   private
 
   def todo_params
-    params.require(:todo).permit(:text, :isCompleted, :project_id)
+    params.require(:todo).permit(:text, :isCompleted, :project_id, :project)
   end
 end
