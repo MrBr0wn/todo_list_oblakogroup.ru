@@ -6,5 +6,6 @@ json.array! @projects do |project|
     json.id todo.id
     json.text todo.text
     json.isCompleted todo.isCompleted
+    json.project_id todo.project_id
   end
 end
