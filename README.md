@@ -1,24 +1,27 @@
-# README
+# Список задач
+Тестовое задание
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Стэк
+```
+Ruby 2.7.0
+Rails 6.0.4
+Postgresql
+jQuery
+Bulma
+```
 
-Things you may want to cover:
+# Запуск
 
-* Ruby version
+```git clone this_project```
 
-* System dependencies
+```bundle install```
 
-* Configuration
+```bundle exec rake db:setup```
 
-* Database creation
+```rails s```
 
-* Database initialization
+# Начальная страница
+```/projects```
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# JSON для фронта на Angular
+```/projects.json```
